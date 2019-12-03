@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zm.gmall.manage.dao.PmsSkuInfoMapper">
+    <!--selectSkuInfoListCheckBySkuId(String spuId);
+-->
+   <select id="selectSkuInfoListCheckBySkuId" resultMap="selectSkuInfoListCheckBySkuIdMap">
+        SELECT si.id as si_id,psav.id as psav_id,si.*,psav.*
+        FROM
+        pms_sku_info si,
+        pms_sku_sale_attr_value psav
+        WHERE si.spu_id = #{spuId}
+        AND psav.sku_id = si.id
+   </select>
+    <resultMap id="selectSkuInfoListCheckBySkuIdMap" autoMapping="true" type="com.zm.gmall.bean.PmsSkuInfo">
+        <result column="si_id" property="id"></result>
+        <collection property="skuSaleAttrValueList" ofType="com.zm.gmall.bean.PmsSkuSaleAttrValue" autoMapping="true">
+            <result column="psav_id" property="id"></result>
+        </collection>
+    </resultMap>
+</mapper>

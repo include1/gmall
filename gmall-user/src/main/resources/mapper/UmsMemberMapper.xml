@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zm.gmall.user.dao.UmsMemberMapper">
+    <!--List<User> selectUser()-->
+    <select id="selectUser" resultType="com.zm.gmall.bean.UmsMember">
+            select * from ums_member
+    </select>
+    <!--int insertUser(@Param("user")User user);-->
+    <insert id="insertUser" parameterType="com.zm.gmall.bean.UmsMember">
+        insert into ums_member
+        (member_level_id,username, password, nickname, phone, status, create_time, icon, gender, birthday, city, job, personalized_signature, source_type, integration, growth, luckey_count, history_integration)
+        values
+        (#{user.memberLevelId},#{user.username},#{user.password},#{user.nickname},#{user.phone},#{user.status},#{user.createTime},#{user.icon},#{user.gender},#{user.birthday},#{user.city},#{user.job},#{user.personalizedSignature},#{user.sourceType},#{user.integration},#{user.growth},#{user.luckeyCount},#{user.historyIntegration})
+
+    </insert>
+    <!--int updateUser(@Param("user")User user);-->
+    <update id="updateUser" parameterType="com.zm.gmall.bean.UmsMember">
+        update ums_member
+        set username=#{user.username},password=#{user.password}
+        where
+        id = #{user.id}
+    </update>
+    <!-- int deleteUserById(String id);-->
+    <delete id="deleteUserById">
+
+        delete from ums_member where id = #{id}
+    </delete>
+</mapper>
